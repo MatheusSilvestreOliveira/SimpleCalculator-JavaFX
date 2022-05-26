@@ -3,6 +3,7 @@ package gui;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -43,92 +44,114 @@ public class MainViewController implements Initializable{
 	@FXML
 	private Button btnEquals;
 	@FXML
+	private Button btnErase;
+	@FXML
 	private TextField txtResult;
 	
 	@FXML
 	public void onBtn0Action() {
-		System.out.println("0");
+		addToTxtResult("0");
 	}
 	
 	@FXML
 	public void onBtn1Action() {
-		System.out.println("1");
+		addToTxtResult("1");
 	}
 	
 	@FXML
 	public void onBtn2Action() {
-		System.out.println("2");
+		addToTxtResult("2");
 	}
 	
 	@FXML
 	public void onBtn3Action() {
-		System.out.println("3");
+		addToTxtResult("3");
 	}
 	
 	@FXML
 	public void onBtn4Action() {
-		System.out.println("4");
+		addToTxtResult("4");
 	}
 	
 	@FXML
 	public void onBtn5Action() {
-		System.out.println("5");
+		addToTxtResult("5");
 	}
 	
 	@FXML
 	public void onBtn6Action() {
-		System.out.println("6");
+		addToTxtResult("6");
 	}
 	
 	@FXML
 	public void onBtn7Action() {
-		System.out.println("7");
+		addToTxtResult("7");
 	}
 	
 	@FXML
 	public void onBtn8Action() {
-		System.out.println("8");
+		addToTxtResult("8");
 	}
 	
 	@FXML
 	public void onBtn9Action() {
-		System.out.println("9");
+		addToTxtResult("9");
 	}
 	
 	@FXML
 	public void onBtnClearAction() {
-		System.out.println("Clear");
+		setTxtResultClear();
 	}
 	
 	@FXML
 	public void onBtnAdditionAction() {
-		System.out.println("Addition");
+		addToTxtResult("+");
 	}
 	
 	@FXML
 	public void onBtnSubtractionAction() {
-		System.out.println("Subtration");
+		addToTxtResult("-");
 	}
 	
 	@FXML
 	public void onBtnMultiplicationAction() {
-		System.out.println("Multiplication");
+		addToTxtResult("*");
 	}
 	
 	@FXML
 	public void onBtnDivisionAction() {
-		System.out.println("Division");
+		addToTxtResult("/");
 	}
 	
 	@FXML
 	public void onBtnEqualsAction() {
-		System.out.println("Equals");
+		System.out.println(getTxtResult());
+	}
+	
+	@FXML
+	public void onBtnEraseAction() {
+		txtResult.setText(txtResult.getText().substring(0, txtResult.getText().length()-1));
 	}
 	
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		initializeNodes();
+	}
+	
+	private void initializeNodes() {
 	}
 
+	private String getTxtResult() {
+		return txtResult.getText();
+	}
+	
+	private void addToTxtResult(String x) {
+		txtResult.setText(txtResult.getText()+x);
+	}
+	
+	private void setTxtResultClear() {
+		txtResult.setText("");
+	}
 	
 	
 }
