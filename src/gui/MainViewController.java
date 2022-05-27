@@ -3,14 +3,16 @@ package gui;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import services.Queue;
 
 public class MainViewController implements Initializable{
 
+	
+	
 	@FXML
 	private Button btn0;
 	@FXML
@@ -125,7 +127,7 @@ public class MainViewController implements Initializable{
 	
 	@FXML
 	public void onBtnEqualsAction() {
-		System.out.println(getTxtResult());
+		
 	}
 	
 	@FXML
@@ -140,10 +142,6 @@ public class MainViewController implements Initializable{
 	
 	private void initializeNodes() {
 	}
-
-	private String getTxtResult() {
-		return txtResult.getText();
-	}
 	
 	private void addToTxtResult(String x) {
 		txtResult.setText(txtResult.getText()+x);
@@ -152,6 +150,8 @@ public class MainViewController implements Initializable{
 	private void setTxtResultClear() {
 		txtResult.setText("");
 	}
+	
+	
 	
 	
 }
