@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Calculation {
-	
-	// TEST CODE, MUST BE IGNORE
-	
+		
 	private String equation;
 	private double answer;
 
