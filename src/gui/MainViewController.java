@@ -32,6 +32,8 @@ public class MainViewController implements Initializable{
 	@FXML
 	private Button btn9;
 	@FXML
+	private Button btnDot;
+	@FXML
 	private Button btnClear;
 	@FXML
 	private Button btnAddition;
@@ -96,6 +98,11 @@ public class MainViewController implements Initializable{
 	@FXML
 	public void onBtn9Action() {
 		addToTxtResult("9");
+	}
+	
+	@FXML
+	public void onBtnDotAction() {
+		addToTxtResult(".");
 	}
 	
 	@FXML

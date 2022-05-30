@@ -7,6 +7,7 @@ public class Calculation {
 		
 	private String equation;
 	private double answer;
+	private String number = "";
 
 	private List<Double> varList = new ArrayList<>();
 	private List<String> opList = new ArrayList<>();
@@ -22,23 +23,32 @@ public class Calculation {
 		for( int i = 0 ; i < equation.length() ; i++) {
 			if( equation.substring(i, i+1).equals("+")) {
 				opList.add(equation.substring(i, i+1));
+				varList.add(Double.parseDouble(number));
+				number = "";
 			} else {
 				if(equation.substring(i, i+1).equals("-")) {
 					opList.add(equation.substring(i, i+1));
+					varList.add(Double.parseDouble(number));
+					number = "";
 				} else {
 					if(equation.substring(i, i+1).equals("*")) {
 						opList.add(equation.substring(i, i+1));
+						varList.add(Double.parseDouble(number));
+						number = "";
 					} else {
 						if(equation.substring(i, i+1).equals("/")) {
 							opList.add(equation.substring(i, i+1));
+							varList.add(Double.parseDouble(number));
+							number = "";
 						} else {
-							varList.add(Double.parseDouble(equation.substring(i, i+1)));
+							number += equation.substring(i, i+1);
 						}
 					}
 				}
 			}
 		}
-		
+		varList.add(Double.parseDouble(number));
+		number = "";
 	}
 	
 	private void doCalculation() {
