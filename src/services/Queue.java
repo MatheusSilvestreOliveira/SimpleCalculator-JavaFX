@@ -38,7 +38,7 @@ public class Queue {
 	}
 	
 	public void removeFromTheMiddleQueue(int pos) {
-		for(int i = pos; i< last; i++) {
+		for(int i = pos; i < last; i++) {
 			queue[pos] = queue[pos+1];
 		}
 		last--;
@@ -47,7 +47,7 @@ public class Queue {
 	
 	public String showQueue() {
 		String q="";
-		for(int i = first; i<= last; i++) {
+		for(int i = first; i <= last; i++) {
 			q += queue[i] + " - ";
 		}
 		return q;

@@ -7,12 +7,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import services.Queue;
+import services.Calculation;
 
 public class MainViewController implements Initializable{
 
-	
-	
 	@FXML
 	private Button btn0;
 	@FXML
@@ -126,13 +124,15 @@ public class MainViewController implements Initializable{
 	}
 	
 	@FXML
-	public void onBtnEqualsAction() {
-		
+	public void onBtnEraseAction() {
+		txtResult.setText(txtResult.getText().substring(0, txtResult.getText().length()-1));
 	}
 	
 	@FXML
-	public void onBtnEraseAction() {
-		txtResult.setText(txtResult.getText().substring(0, txtResult.getText().length()-1));
+	public void onBtnEqualsAction() {
+		Calculation calc = new Calculation(txtResult.getText());
+		System.out.println(calc.getAnswer());
+		txtResult.setText(Double.toString(calc.getAnswer()));
 	}
 	
 	@Override
