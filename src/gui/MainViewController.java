@@ -202,6 +202,7 @@ public class MainViewController implements Initializable{
 	private void initializeNodes() {
 		Constraints.setTextFieldNumbersAndOperators(txtResult);
 		Constraints.setTextFieldMaxLength(txtResult, 30);
+		Constraints.setTextFieldNoSymbols(txtResult);
 	}
 	
 	private void addToTxtResult(String txt) {
