@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import services.Calculation;
 import services.MainViewService;
+import util.Constraints;
 
 public class MainViewController implements Initializable{
 
@@ -108,7 +109,7 @@ public class MainViewController implements Initializable{
 		if(txtResult.getText().length() == 0) {
 			addToTxtResult("0");
 		}
-		if(!service.lastIsDot(txtResult.getText())) {
+		if(!service.alreadyHasDot(txtResult.getText())) {
 			addToTxtResult(".");
 		}
 	}
@@ -120,41 +121,50 @@ public class MainViewController implements Initializable{
 	
 	@FXML
 	public void onBtnAdditionAction() {
-		if(service.lastIsDot(txtResult.getText())) {
-			addToTxtResult("0");
+		if(txtResult.getText().length() != 0) {
+			if(service.lastIsDot(txtResult.getText())) {
+				addToTxtResult("0");
+			}
+			if(!service.lastIsOperation(txtResult.getText())) {
+				addToTxtResult("+");
+			}
 		}
-		if(!service.lastIsOperation(txtResult.getText())) {
-			addToTxtResult("+");
-		}		
 	}
 	
 	@FXML
 	public void onBtnSubtractionAction() {
-		if(service.lastIsDot(txtResult.getText())) {
-			addToTxtResult("0");
+		if(txtResult.getText().length() != 0) {
+			if(service.lastIsDot(txtResult.getText())) {
+				addToTxtResult("0");
+			}
+			if(!service.lastIsOperation(txtResult.getText())) {
+				addToTxtResult("-");
+			}
 		}
-		if(!service.lastIsOperation(txtResult.getText())) {
-			addToTxtResult("-");
-		}
+		
 	}
 	
 	@FXML
 	public void onBtnMultiplicationAction() {
-		if(service.lastIsDot(txtResult.getText())) {
-			addToTxtResult("0");
-		}
-		if(!service.lastIsOperation(txtResult.getText())) {
-			addToTxtResult("*");
+		if(txtResult.getText().length() != 0) {
+			if(service.lastIsDot(txtResult.getText())) {
+				addToTxtResult("0");
+			}
+			if(!service.lastIsOperation(txtResult.getText())) {
+				addToTxtResult("*");
+			}
 		}
 	}
 	
 	@FXML
 	public void onBtnDivisionAction() {
-		if(service.lastIsDot(txtResult.getText())) {
-			addToTxtResult("0");
-		}
-		if(!service.lastIsOperation(txtResult.getText())) {
-			addToTxtResult("/");
+		if(txtResult.getText().length() != 0) {
+			if(service.lastIsDot(txtResult.getText())) {
+				addToTxtResult("0");
+			}
+			if(!service.lastIsOperation(txtResult.getText())) {
+				addToTxtResult("/");
+			}
 		}
 	}
 	
@@ -167,7 +177,7 @@ public class MainViewController implements Initializable{
 	
 	@FXML
 	public void onBtnEqualsAction() {
-		
+				
 		if(service.lastIsDot(txtResult.getText())) {
 			addToTxtResult("0");
 		}
@@ -177,7 +187,8 @@ public class MainViewController implements Initializable{
 		
 		Calculation calc = new Calculation(txtResult.getText());
 		System.out.println(calc.getAnswer());
-		txtResult.setText(Double.toString(calc.getAnswer()));
+		txtResult.setText(String.format("%,.2f", calc.getAnswer()));
+		//txtResult.setText(Double.toString(calc.getAnswer()));
 	}
 	
 	@Override
@@ -186,6 +197,8 @@ public class MainViewController implements Initializable{
 	}
 	
 	private void initializeNodes() {
+		Constraints.setTextFieldNumbersAndOperators(txtResult);
+		Constraints.setTextFieldMaxLength(txtResult, 30);
 	}
 	
 	private void addToTxtResult(String txt) {
