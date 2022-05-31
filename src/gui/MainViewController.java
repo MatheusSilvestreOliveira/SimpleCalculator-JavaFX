@@ -1,6 +1,7 @@
 package gui;
 
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
@@ -14,6 +15,7 @@ import util.Constraints;
 public class MainViewController implements Initializable{
 
 	private MainViewService service = new MainViewService();
+	Locale locale = new Locale("en", "US");
 	
 	@FXML
 	private Button btn0;
@@ -177,7 +179,8 @@ public class MainViewController implements Initializable{
 	
 	@FXML
 	public void onBtnEqualsAction() {
-				
+		Locale.setDefault(locale);
+		
 		if(service.lastIsDot(txtResult.getText())) {
 			addToTxtResult("0");
 		}
