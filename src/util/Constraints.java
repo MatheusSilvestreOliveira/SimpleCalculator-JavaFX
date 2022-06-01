@@ -38,7 +38,7 @@ public class Constraints {
 	}
 	
 	private static boolean hasSymbols(String txt) {
-		String symbol = "'!@#$%¨&*_=|´`[{]}~^,<>;:/?";
+		String symbol = "'!@#$%¨&_=|´`[{]}~^,<>;:?";
 		for(int i=0 ; i<txt.length() ; i++) {
 			for(int y=0 ; y<symbol.length() ; y++) {
 				if(txt.substring(i, i+1).equals(symbol.substring(y, y+1))) {

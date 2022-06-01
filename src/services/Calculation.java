@@ -25,17 +25,12 @@ public class Calculation {
 	}
 	
 	private void defineEquations() {
-		
 		for( int i = 0 ; i < equation.length() ; i++) {
-			
-			//TEST CODE FOR BRACKETS
 			if(equation.substring(i, i+1).equals("(")) {
 				i = resolveBrackets(i);
 				number += Double.parseDouble(localBracketAnswer);
 				localBracketAnswer = "";
-			} else {
-				
-						
+			} else {		
 				if( equation.substring(i, i+1).equals("+")) {
 					opList.add(equation.substring(i, i+1));
 					varList.add(Double.parseDouble(number));
@@ -57,15 +52,12 @@ public class Calculation {
 								number = "";
 							} else {
 								number += equation.substring(i, i+1);
-							}
-						}
-					}
-				}
-			
-				
-			} // brackets if
-			
-		}
+							} // if /
+						} // if *
+					} // if -
+				} // if +
+			} // if ()
+		} // for
 		if(!number.equals("")) {
 			varList.add(Double.parseDouble(number));
 			number = "";
@@ -74,8 +66,17 @@ public class Calculation {
 	}
 	
 	private int resolveBrackets(int y) {
+		int bracketCounter = 0;
 		y++;
-		while (!equation.substring(y, y+1).equals(")")){
+		while (!equation.substring(y, y+1).equals(")") || bracketCounter!=0){
+			if(equation.substring(y, y+1).equals("(")) {
+				bracketCounter++;
+			}
+			
+			if(equation.substring(y, y+1).equals(")")) {
+				bracketCounter--;
+			}
+			
 			newEquation += equation.substring(y, y+1);
 			y++;
 		}
