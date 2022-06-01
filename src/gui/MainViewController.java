@@ -120,7 +120,40 @@ public class MainViewController implements Initializable{
 	
 	@FXML
 	public void onBtnBracketAction() {
-		
+		if(service.lastIsDot(txtResult.getText())) {
+			addToTxtResult("0");
+		}
+		//equação vazia
+		if(txtResult.getText().length() == 0) {
+			addToTxtResult("(");
+		} else {
+			//ultimo é operador ou numero ou ( ou )
+			if(service.lastIsOperation(txtResult.getText())) {
+				addToTxtResult("(");
+			} else {
+				//ultimo digito é numero ou ( ou  )
+				if(service.lastIsNumber(txtResult.getText())) {
+					if(service.hasBracketOpen(txtResult.getText())) {
+						addToTxtResult(")");
+					} else {
+						addToTxtResult("*");
+						addToTxtResult("(");
+					}
+				} else {
+					//ultimo é ( ou )
+					if(service.hasBracketOpen(txtResult.getText())) {
+						if(txtResult.getText().substring(txtResult.getText().length()-1).equals("(")) {
+							addToTxtResult("(");
+						} else {
+							addToTxtResult(")");
+						}
+					} else {
+						addToTxtResult("*");
+						addToTxtResult("(");
+					}
+				}
+			}		
+		}		
 	}
 	
 	@FXML
@@ -134,7 +167,7 @@ public class MainViewController implements Initializable{
 			if(service.lastIsDot(txtResult.getText())) {
 				addToTxtResult("0");
 			}
-			if(!service.lastIsOperation(txtResult.getText())) {
+			if(!service.lastIsOperation(txtResult.getText()) && !service.lastIsOpenBracket(txtResult.getText())) {
 				addToTxtResult("+");
 			}
 		}
@@ -146,7 +179,7 @@ public class MainViewController implements Initializable{
 			if(service.lastIsDot(txtResult.getText())) {
 				addToTxtResult("0");
 			}
-			if(!service.lastIsOperation(txtResult.getText())) {
+			if(!service.lastIsOperation(txtResult.getText()) && !service.lastIsOpenBracket(txtResult.getText())) {
 				addToTxtResult("-");
 			}
 		}
@@ -159,7 +192,7 @@ public class MainViewController implements Initializable{
 			if(service.lastIsDot(txtResult.getText())) {
 				addToTxtResult("0");
 			}
-			if(!service.lastIsOperation(txtResult.getText())) {
+			if(!service.lastIsOperation(txtResult.getText()) && !service.lastIsOpenBracket(txtResult.getText())) {
 				addToTxtResult("*");
 			}
 		}
@@ -171,7 +204,7 @@ public class MainViewController implements Initializable{
 			if(service.lastIsDot(txtResult.getText())) {
 				addToTxtResult("0");
 			}
-			if(!service.lastIsOperation(txtResult.getText())) {
+			if(!service.lastIsOperation(txtResult.getText()) && !service.lastIsOpenBracket(txtResult.getText())) {
 				addToTxtResult("/");
 			}
 		}
@@ -193,6 +226,9 @@ public class MainViewController implements Initializable{
 		}
 		if(service.lastIsOperation(txtResult.getText())) {
 			onBtnEraseAction();
+		}
+		while(service.hasBracketOpen(txtResult.getText())) {
+			addToTxtResult(")");
 		}
 		
 		Calculation calc = new Calculation(txtResult.getText());

@@ -1,10 +1,13 @@
 package services;
 
 public class MainViewService {
-
+		
 	public MainViewService() {}
 	
 	public boolean lastIsDot(String txt) {
+		if(txt.length() == 0) {
+			return false;
+		}
 		return txt.substring(txt.length()-1).equals(".");
 	}
 	
@@ -29,6 +32,30 @@ public class MainViewService {
 		return hasDot;
 	}
 	
+	public boolean lastIsNumber(String txt) {
+		return txt.substring(txt.length()-1).matches("\\d");
+	}
 	
+	public boolean lastIsOpenBracket(String txt) {
+		return txt.substring(txt.length()-1).equals("(");
+	}
 	
+	public boolean hasBracketOpen(String txt) {
+		int openBracketCtr = 0;
+		int closedBracketCtr = 0;
+		for(int i = 0 ; i < txt.length() ; i ++) {
+			if(txt.substring(i, i+1).equals("(")) {
+				openBracketCtr++;
+			} else {
+				if (txt.substring(i, i+1).equals(")")) {
+					closedBracketCtr++;
+				}
+			}
+		}
+		
+		if(openBracketCtr == closedBracketCtr) {
+			return false;
+		}
+		return true;
+	}
 }
