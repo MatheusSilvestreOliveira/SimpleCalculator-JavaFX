@@ -7,13 +7,19 @@ public class Calculation {
 		
 	private String equation;
 	private double answer;
-	private String number = "";
+	private String number;
 
+	private String newEquation;
+	private String localBracketAnswer;
+	
 	private List<Double> varList = new ArrayList<>();
 	private List<String> opList = new ArrayList<>();
 	
 	public Calculation (String equation) {
 		this.equation = equation;
+		number = "";
+		newEquation = "";
+		localBracketAnswer = "";
 		defineEquations();
 		doCalculation();
 	}
@@ -21,34 +27,62 @@ public class Calculation {
 	private void defineEquations() {
 		
 		for( int i = 0 ; i < equation.length() ; i++) {
-			if( equation.substring(i, i+1).equals("+")) {
-				opList.add(equation.substring(i, i+1));
-				varList.add(Double.parseDouble(number));
-				number = "";
+			
+			//TEST CODE FOR BRACKETS
+			if(equation.substring(i, i+1).equals("(")) {
+				i = resolveBrackets(i);
+				number += Double.parseDouble(localBracketAnswer);
+				localBracketAnswer = "";
 			} else {
-				if(equation.substring(i, i+1).equals("-")) {
+				
+						
+				if( equation.substring(i, i+1).equals("+")) {
 					opList.add(equation.substring(i, i+1));
 					varList.add(Double.parseDouble(number));
 					number = "";
 				} else {
-					if(equation.substring(i, i+1).equals("*")) {
+					if(equation.substring(i, i+1).equals("-")) {
 						opList.add(equation.substring(i, i+1));
 						varList.add(Double.parseDouble(number));
 						number = "";
 					} else {
-						if(equation.substring(i, i+1).equals("/")) {
+						if(equation.substring(i, i+1).equals("*")) {
 							opList.add(equation.substring(i, i+1));
 							varList.add(Double.parseDouble(number));
 							number = "";
 						} else {
-							number += equation.substring(i, i+1);
+							if(equation.substring(i, i+1).equals("/")) {
+								opList.add(equation.substring(i, i+1));
+								varList.add(Double.parseDouble(number));
+								number = "";
+							} else {
+								number += equation.substring(i, i+1);
+							}
 						}
 					}
 				}
-			}
+			
+				
+			} // brackets if
+			
 		}
-		varList.add(Double.parseDouble(number));
-		number = "";
+		if(!number.equals("")) {
+			varList.add(Double.parseDouble(number));
+			number = "";
+		}
+
+	}
+	
+	private int resolveBrackets(int y) {
+		y++;
+		while (!equation.substring(y, y+1).equals(")")){
+			newEquation += equation.substring(y, y+1);
+			y++;
+		}
+		Calculation newCalculation = new Calculation(newEquation);
+		localBracketAnswer = Double.toString(newCalculation.getAnswer());
+		newEquation = "";
+		return y;
 	}
 	
 	private void doCalculation() {

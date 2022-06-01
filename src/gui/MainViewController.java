@@ -40,6 +40,8 @@ public class MainViewController implements Initializable{
 	@FXML
 	private Button btnDot;
 	@FXML
+	private Button btnBracket;
+	@FXML
 	private Button btnClear;
 	@FXML
 	private Button btnAddition;
@@ -114,6 +116,11 @@ public class MainViewController implements Initializable{
 		if(!service.alreadyHasDot(txtResult.getText())) {
 			addToTxtResult(".");
 		}
+	}
+	
+	@FXML
+	public void onBtnBracketAction() {
+		
 	}
 	
 	@FXML
