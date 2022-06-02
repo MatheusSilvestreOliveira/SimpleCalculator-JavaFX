@@ -62,51 +62,81 @@ public class MainViewController implements Initializable{
 	
 	@FXML
 	public void onBtn0Action() {
+		if(service.lastIsClosedBracket(txtResult.getText())) {
+			addToTxtResult("*");
+		}
 		addToTxtResult("0");
 	}
 	
 	@FXML
 	public void onBtn1Action() {
+		if(service.lastIsClosedBracket(txtResult.getText())) {
+			addToTxtResult("*");
+		}
 		addToTxtResult("1");
 	}
 	
 	@FXML
 	public void onBtn2Action() {
+		if(service.lastIsClosedBracket(txtResult.getText())) {
+			addToTxtResult("*");
+		}
 		addToTxtResult("2");
 	}
 	
 	@FXML
 	public void onBtn3Action() {
+		if(service.lastIsClosedBracket(txtResult.getText())) {
+			addToTxtResult("*");
+		}
 		addToTxtResult("3");
 	}
 	
 	@FXML
 	public void onBtn4Action() {
+		if(service.lastIsClosedBracket(txtResult.getText())) {
+			addToTxtResult("*");
+		}
 		addToTxtResult("4");
 	}
 	
 	@FXML
 	public void onBtn5Action() {
+		if(service.lastIsClosedBracket(txtResult.getText())) {
+			addToTxtResult("*");
+		}
 		addToTxtResult("5");
 	}
 	
 	@FXML
 	public void onBtn6Action() {
+		if(service.lastIsClosedBracket(txtResult.getText())) {
+			addToTxtResult("*");
+		}
 		addToTxtResult("6");
 	}
 	
 	@FXML
 	public void onBtn7Action() {
+		if(service.lastIsClosedBracket(txtResult.getText())) {
+			addToTxtResult("*");
+		}
 		addToTxtResult("7");
 	}
 	
 	@FXML
 	public void onBtn8Action() {
+		if(service.lastIsClosedBracket(txtResult.getText())) {
+			addToTxtResult("*");
+		}
 		addToTxtResult("8");
 	}
 	
 	@FXML
 	public void onBtn9Action() {
+		if(service.lastIsClosedBracket(txtResult.getText())) {
+			addToTxtResult("*");
+		}
 		addToTxtResult("9");
 	}
 	
@@ -119,7 +149,7 @@ public class MainViewController implements Initializable{
 			addToTxtResult(".");
 		}
 	}
-	// numeros depois do ) _________________________________________________________________________________________________________
+	
 	@FXML
 	public void onBtnBracketAction() {
 		if(service.lastIsDot(txtResult.getText())) {
@@ -166,7 +196,7 @@ public class MainViewController implements Initializable{
 		if(!(txtResult.getText().length()==0)) {
 			//ultimo é numero
 			if(service.lastIsNumber(txtResult.getText()) || service.lastIsDot(txtResult.getText())) {
-				lastNumber = service.changeToNegative(txtResult.getText());
+				lastNumber = service.returnLastNumber(txtResult.getText());
 				for(int i = 1 ; i <= lastNumber.length() ; i++) {
 					if(txtResult.getText().length() != 0) {
 						txtResult.setText(txtResult.getText().substring(0, txtResult.getText().length()-1));
