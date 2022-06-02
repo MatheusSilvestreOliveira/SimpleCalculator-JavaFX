@@ -25,7 +25,7 @@ public class Calculation {
 	}
 	
 	private void defineEquations() {
-		for( int i = 0 ; i < equation.length() ; i++) {
+		for(int i = 0 ; i < equation.length() ; i++) {
 			if(equation.substring(i, i+1).equals("(")) {
 				i = resolveBrackets(i);
 				number += Double.parseDouble(localBracketAnswer);
@@ -56,7 +56,16 @@ public class Calculation {
 								varList.add(Double.parseDouble(number));
 								number = "";
 							} else {
-								number += equation.substring(i, i+1);
+								if(equation.substring(i, i+1).equals("%")) {
+									if(varList.size()!=0) {
+										equation = equation.substring(0, i+1) + "(("+ number + "/" + 100+")*"+ varList.get(varList.size()-1)+")" + equation.substring(i+1);
+									} else {
+										equation = equation.substring(0, i+1) + "("+ number + "/" + 100+")" + equation.substring(i+1) ;
+									}
+									number = "";
+								}else {
+									number += equation.substring(i, i+1);
+								} // if %
 							} // if /
 						} // if *
 					} // if -

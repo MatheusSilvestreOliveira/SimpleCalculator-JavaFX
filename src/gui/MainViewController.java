@@ -54,6 +54,8 @@ public class MainViewController implements Initializable{
 	@FXML
 	private Button btnDivision;
 	@FXML
+	private Button btnPercent;
+	@FXML
 	private Button btnEquals;
 	@FXML
 	private Button btnErase;
@@ -283,6 +285,18 @@ public class MainViewController implements Initializable{
 			}
 			if(!service.lastIsOperation(txtResult.getText()) && !service.lastIsOpenBracket(txtResult.getText())) {
 				addToTxtResult("/");
+			}
+		}
+	}
+	
+	@FXML
+	public void onBtnPercentAction() {
+		if(txtResult.getText().length() != 0) {
+			if(service.lastIsDot(txtResult.getText())) {
+				addToTxtResult("0");
+			}
+			if(!service.lastIsOperation(txtResult.getText()) && !service.lastIsOpenBracket(txtResult.getText())) {
+				addToTxtResult("%");
 			}
 		}
 	}
