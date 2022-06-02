@@ -12,6 +12,9 @@ public class MainViewService {
 	}
 	
 	public boolean lastIsOperation(String txt) {
+		if(txt.length()==0) {
+			return false;
+		}
 		return txt.substring(txt.length()-1).equals("+") ||
 				txt.substring(txt.length()-1).equals("-") ||
 				txt.substring(txt.length()-1).equals("*") ||
@@ -33,14 +36,23 @@ public class MainViewService {
 	}
 	
 	public boolean lastIsNumber(String txt) {
+		if(txt.length()==0) {
+			return false;
+		}
 		return txt.substring(txt.length()-1).matches("\\d");
 	}
 	
 	public boolean lastIsOpenBracket(String txt) {
+		if(txt.length()==0) {
+			return false;
+		}
 		return txt.substring(txt.length()-1).equals("(");
 	}
 	
 	public boolean lastIsClosedBracket(String txt) {
+		if(txt.length()==0) {
+			return false;
+		}
 		return txt.substring(txt.length()-1).equals(")");
 	}
 	
@@ -63,7 +75,7 @@ public class MainViewService {
 		return true;
 	}
 	
-	public String changeToNegative(String txt) {
+	public String returnLastNumber(String txt) {
 		String x = "";
 		for(int i = txt.length()-1 ; i >= 0 ; i--) {
 			if(lastIsOperation(txt.substring(i, i+1)) || lastIsOpenBracket(txt.substring(i, i+1))) {

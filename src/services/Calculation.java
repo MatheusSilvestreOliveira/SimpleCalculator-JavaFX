@@ -36,11 +36,7 @@ public class Calculation {
 					varList.add(Double.parseDouble(number));
 					number = "";
 				} else {
-					if(equation.substring(i, i+1).equals("-")) {
-//						opList.add(equation.substring(i, i+1));
-//						varList.add(Double.parseDouble(number));
-//						number = "";
-						
+					if(equation.substring(i, i+1).equals("-")) {						
 						if(number.equals("")) {
 							opList.add("*");
 							varList.add(-1.0);
@@ -48,10 +44,7 @@ public class Calculation {
 							opList.add(equation.substring(i, i+1));
 							varList.add(Double.parseDouble(number));
 							number = "";
-						}
-						
-						
-						
+						}						
 					} else {
 						if(equation.substring(i, i+1).equals("*")) {
 							opList.add(equation.substring(i, i+1));
@@ -100,11 +93,8 @@ public class Calculation {
 	
 	private void doCalculation() {
 		
-		System.out.println(varList.toString());
-		System.out.println(opList.toString());
-		
 		for(int i = 0 ; i < opList.size() ; i++) {
-			while (opList.size() != 0  && (opList.get(i).equals("*") || opList.get(i).equals("/"))) {
+			while ((i < opList.size()) && opList.size() != 0  && (opList.get(i).equals("*") || opList.get(i).equals("/"))) {
 				if(opList.get(i).equals("*")) {
 					varList.set(i, multiplication(varList.get(i), varList.get(i+1)));
 					varList.remove(i+1);
@@ -116,13 +106,11 @@ public class Calculation {
 						opList.remove(i);
 					}
 				}
-				System.out.println(varList.toString());
-				System.out.println(opList.toString());
 			}
 		}
 		
 		for(int i = 0 ; i < opList.size() ; i++) {
-			while (opList.size() != 0 && (opList.get(i).equals("+") || opList.get(i).equals("-"))) {
+			while ((i < opList.size()) && opList.size() != 0 && (opList.get(i).equals("+") || opList.get(i).equals("-"))) {
 				if(opList.get(i).equals("+")) {
 					varList.set(i, addition(varList.get(i), varList.get(i+1)));
 					varList.remove(i+1);
@@ -134,8 +122,6 @@ public class Calculation {
 						opList.remove(i);
 					}
 				}
-				System.out.println(varList.toString());
-				System.out.println(opList.toString());
 			}
 		}
 		
