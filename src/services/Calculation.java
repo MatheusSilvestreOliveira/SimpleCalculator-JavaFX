@@ -37,9 +37,21 @@ public class Calculation {
 					number = "";
 				} else {
 					if(equation.substring(i, i+1).equals("-")) {
-						opList.add(equation.substring(i, i+1));
-						varList.add(Double.parseDouble(number));
-						number = "";
+//						opList.add(equation.substring(i, i+1));
+//						varList.add(Double.parseDouble(number));
+//						number = "";
+						
+						if(number.equals("")) {
+							opList.add("*");
+							varList.add(-1.0);
+						} else {
+							opList.add(equation.substring(i, i+1));
+							varList.add(Double.parseDouble(number));
+							number = "";
+						}
+						
+						
+						
 					} else {
 						if(equation.substring(i, i+1).equals("*")) {
 							opList.add(equation.substring(i, i+1));

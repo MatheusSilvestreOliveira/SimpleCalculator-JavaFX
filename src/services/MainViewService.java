@@ -40,6 +40,10 @@ public class MainViewService {
 		return txt.substring(txt.length()-1).equals("(");
 	}
 	
+	public boolean lastIsClosedBracket(String txt) {
+		return txt.substring(txt.length()-1).equals(")");
+	}
+	
 	public boolean hasBracketOpen(String txt) {
 		int openBracketCtr = 0;
 		int closedBracketCtr = 0;
@@ -58,4 +62,20 @@ public class MainViewService {
 		}
 		return true;
 	}
+	
+	public String changeToNegative(String txt) {
+		String x = "";
+		for(int i = txt.length()-1 ; i >= 0 ; i--) {
+			if(lastIsOperation(txt.substring(i, i+1)) || lastIsOpenBracket(txt.substring(i, i+1))) {
+				x = txt.substring(i+1);
+				return x;
+			}
+			if(i==0) {
+				x = txt;
+				return x;
+			}
+		}
+		return x;
+	}
+	
 }

@@ -42,6 +42,8 @@ public class MainViewController implements Initializable{
 	@FXML
 	private Button btnBracket;
 	@FXML
+	private Button btnNegOrPos;
+	@FXML
 	private Button btnClear;
 	@FXML
 	private Button btnAddition;
@@ -117,7 +119,7 @@ public class MainViewController implements Initializable{
 			addToTxtResult(".");
 		}
 	}
-	
+	// numeros depois do ) _________________________________________________________________________________________________________
 	@FXML
 	public void onBtnBracketAction() {
 		if(service.lastIsDot(txtResult.getText())) {
@@ -157,6 +159,52 @@ public class MainViewController implements Initializable{
 	}
 	
 	@FXML
+	public void onBtnNegOrPosAction() {
+		String lastNumber = "";
+		
+		//o tamanho é diferente de 0
+		if(!(txtResult.getText().length()==0)) {
+			//ultimo é numero
+			if(service.lastIsNumber(txtResult.getText()) || service.lastIsDot(txtResult.getText())) {
+				lastNumber = service.changeToNegative(txtResult.getText());
+				for(int i = 1 ; i <= lastNumber.length() ; i++) {
+					if(txtResult.getText().length() != 0) {
+						txtResult.setText(txtResult.getText().substring(0, txtResult.getText().length()-1));
+					}
+				}
+			}
+		}
+		
+		//o tamanho é diferente de 0 pós possivel remoção
+		if(!(txtResult.getText().length()==0)) {
+			//ultimo é operador diferente de -
+			if(service.lastIsOperation(txtResult.getText()) && !(txtResult.getText().substring(txtResult.getText().length()-1).equals("-"))) {
+				addToTxtResult("(-");
+			} else {
+				//ultimo é o operador -
+				if(txtResult.getText().substring(txtResult.getText().length()-1).equals("-")) {
+					//existe ( antes do operador -
+					if(txtResult.getText().substring(txtResult.getText().length()-2, txtResult.getText().length()-1).equals("(")) {
+						onBtnEraseAction();
+						onBtnEraseAction();
+					}
+				} else {
+					if(service.lastIsClosedBracket(txtResult.getText())) {
+						addToTxtResult("*");
+					}
+					addToTxtResult("(-");
+				}
+			}
+		} else {
+			addToTxtResult("(-");
+		}
+		
+		if(!lastNumber.equals("")) {
+			addToTxtResult(lastNumber);
+		}
+	}
+	
+	@FXML
 	public void onBtnClearAction() {
 		setTxtResultClear();
 	}
@@ -183,7 +231,6 @@ public class MainViewController implements Initializable{
 				addToTxtResult("-");
 			}
 		}
-		
 	}
 	
 	@FXML
