@@ -1,8 +1,13 @@
 package services;
 
 public class MainViewService {
-		
-	public MainViewService() {}
+	
+	private String decimalFormatString;
+	private double previousAnswer;
+	
+	public MainViewService() {
+		decimalFormatString = "%.2f";
+	}
 	
 	public boolean lastIsDot(String txt) {
 		if(txt.length() == 0) {
@@ -90,4 +95,58 @@ public class MainViewService {
 		return x;
 	}
 	
+	public String changeDecimalFormat() {
+		if(decimalFormatString.equals("%.0f")){
+			decimalFormatString = "%.1f";
+		} else {
+			if(decimalFormatString.equals("%.1f")) {
+				decimalFormatString = "%.2f";
+			} else {
+				if(decimalFormatString.equals("%.2f")) {
+					decimalFormatString = "%.4f";
+				} else {
+					if(decimalFormatString.equals("%.4f")) {
+						decimalFormatString = "%.6f";
+					} else {
+						if(decimalFormatString.equals("%.6f")) {
+							decimalFormatString = "%.0f";
+						} else {
+							decimalFormatString = "%.0f";
+						}
+					}
+				}
+			}
+		}
+		
+		return decimalFormatString ;
+	}
+	
+	public void resolveEqualAction(String txt) {
+		if(lastIsDot(txt)) {
+			txt+="0";
+		}
+		if(lastIsOperation(txt)) {
+			if(txt.length() != 0) {
+				txt.substring(0, txt.length()-1);
+			}
+		}
+		while(hasBracketOpen(txt)) {
+			txt+=")";
+		}
+		
+		Calculation calc = new Calculation(txt);
+		setPreviousAnswer(calc.getAnswer());
+	}
+	
+	public String returnAnswer() {
+		return String.format(decimalFormatString, previousAnswer);
+	}
+	
+	private void setPreviousAnswer(double answer) {
+		previousAnswer = answer;
+	}
+	
+	public String getPreviousAnswer() {
+		return String.format(decimalFormatString, previousAnswer);
+	}
 }

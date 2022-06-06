@@ -8,7 +8,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import services.Calculation;
 import services.MainViewService;
 import util.Constraints;
 
@@ -57,6 +56,8 @@ public class MainViewController implements Initializable{
 	private Button btnPercent;
 	@FXML
 	private Button btnEquals;
+	@FXML
+	private Button btnChangeDec;
 	@FXML
 	private Button btnErase;
 	@FXML
@@ -309,23 +310,20 @@ public class MainViewController implements Initializable{
 	}
 	
 	@FXML
+	public void onBtnChangeDecAction() {
+		if(txtResult.getText().equals(service.getPreviousAnswer())) {
+			btnChangeDec.setText(service.changeDecimalFormat());
+			txtResult.setText(service.returnAnswer());
+		} else {
+			btnChangeDec.setText(service.changeDecimalFormat());
+		}		
+	}
+	
+	@FXML
 	public void onBtnEqualsAction() {
 		Locale.setDefault(locale);
-		
-		if(service.lastIsDot(txtResult.getText())) {
-			addToTxtResult("0");
-		}
-		if(service.lastIsOperation(txtResult.getText())) {
-			onBtnEraseAction();
-		}
-		while(service.hasBracketOpen(txtResult.getText())) {
-			addToTxtResult(")");
-		}
-		
-		Calculation calc = new Calculation(txtResult.getText());
-		System.out.println(calc.getAnswer());
-		txtResult.setText(String.format("%,.2f", calc.getAnswer()));
-		//txtResult.setText(Double.toString(calc.getAnswer()));
+		service.resolveEqualAction(txtResult.getText());
+		txtResult.setText(service.returnAnswer());
 	}
 	
 	@Override
